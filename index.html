@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Love</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, #ffe0ec, #ffc3a0);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      animation: fadeIn 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .container {
+      background: #fff0f6;
+      border-radius: 30px;
+      padding: 3rem;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 3rem;
+    }
+
+    .container::before {
+      content: "";
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center;
+      background-size: 100px;
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 100px;
+      height: 100px;
+      opacity: 0.2;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      color: #e91e63;
+      margin-bottom: 1rem;
+      animation: popIn 1s ease-in-out;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .typewriter {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #e91e63;
+      animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
+      font-size: 1.3rem;
+      color: #e91e63;
+      margin-bottom: 2rem;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #5a2a3b;
+      line-height: 1.7;
+    }
+
+    .quote {
+      font-style: italic;
+      font-size: 1.5rem;
+      color: #ff6f91;
+      margin: 2rem 0;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .quote::before, .quote::after {
+      content: '“';
+      font-size: 2rem;
+      color: #f06292;
+    }
+
+    .quote::after {
+      content: '”';
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 20px;
+      object-fit: cover;
+      height: 180px;
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.07);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .footer {
+      margin-top: 2rem;
+      font-size: 1rem;
+      color: #7c405f;
+    }
+
+    audio {
+      margin-top: 2rem;
+    }
+
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center;
+      background-size: contain;
+      animation: float 10s linear infinite;
+      opacity: 0.4;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); }
+      100% { transform: translateY(-10vh) scale(1.2); }
+    }
+
+    .game-container {
+      background: #ffe6f0;
+      border-radius: 20px;
+      padding: 2rem;
+      margin-top: 3rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .game-question {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #c2185b;
+    }
+
+    .game-options button {
+      padding: 0.8rem 1.2rem;
+      margin: 0.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #f06292;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .game-options button:hover {
+      background-color: #e91e63;
+    }
+
+    .game-result {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #880e4f;
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts">
+    <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 25%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 40%; animation-delay: 4s;"></div>
+    <div class="heart" style="left: 60%; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 75%; animation-delay: 3s;"></div>
+    <div class="heart" style="left: 90%; animation-delay: 5s;"></div>
+  </div>
+
+  <div class="container">
+    <h1>For the Love of My Life</h1>
+    <div class="typewriter">Every beat of my heart says your name...</div>
+    <p>Hey baby, I know sometimes things get a little tough, and maybe I seem distant, but it’s only because I care so much. I am not sad <strong>with</strong> you, I am scared <strong>without</strong> you. You’re the most beautiful part of my life. I might not be perfect, but my love for you is pure and endless.</p>
+    <div class="quote">In your smile, I see something more beautiful than the stars.</div>
+    
+    <style>
+        .photo-ordering-game {
+          margin: 40px 0;
+          text-align: center;
+        }
+      
+        .photo-ordering-game h2 {
+          font-family: 'Great Vibes', cursive;
+          font-size: 28px;
+          margin-bottom: 10px;
+        }
+      
+        .photo-container {
+          display: flex;
+          justify-content: center;
+          gap: 15px;
+          flex-wrap: wrap;
+          margin-bottom: 20px;
+        }
+      
+        .draggable-photo {
+          width: 120px;
+          height: 120px;
+          object-fit: cover;
+          border-radius: 12px;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          cursor: move;
+          transition: transform 0.2s ease;
+        }
+      
+        .draggable-photo.dragging {
+          opacity: 0.5;
+          transform: scale(1.1);
+        }
+      
+        .submit-order-btn {
+          background-color: #ff8fb1;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          font-weight: bold;
+          border-radius: 25px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+      
+        .submit-order-btn:hover {
+          background-color: #ff6e9c;
+        }
+      
+        .result-message {
+          font-family: 'Poppins', sans-serif;
+          margin-top: 15px;
+          font-size: 16px;
+          color: #444;
+          font-weight: bold;
+        }
+      </style>
+      
+      <div class="photo-ordering-game">
+        <h2>Arrange the photos in the order you sent them to me 🥺</h2>
+        <div class="photo-container" id="photoContainer">
+          <img src="feb.jpg" alt="Her 1" class="draggable-photo" draggable="true" data-order="3">
+          <img src="march.jpg" alt="Her 2" class="draggable-photo" draggable="true" data-order="4">
+          <img src="sept.jpg" alt="Her 3" class="draggable-photo" draggable="true" data-order="1">
+          <img src="nov.jpg" alt="Her 4" class="draggable-photo" draggable="true" data-order="2">
+        </div>
+
+        
+
+
+        <button class="submit-order-btn" onclick="checkOrder()">Submit Order</button>
+        <div class="result-message" id="photoResult"></div>
+      </div>
+      
+      <script>
+        const container = document.getElementById("photoContainer");
+        let draggedItem = null;
+      
+        container.addEventListener("dragstart", function (e) {
+          if (e.target.classList.contains("draggable-photo")) {
+            draggedItem = e.target;
+            setTimeout(() => {
+              e.target.classList.add("dragging");
+            }, 0);
+          }
+        });
+      
+        container.addEventListener("dragend", function (e) {
+          if (e.target.classList.contains("draggable-photo")) {
+            e.target.classList.remove("dragging");
+          }
+        });
+      
+        container.addEventListener("dragover", function (e) {
+          e.preventDefault();
+          const afterElement = getDragAfterElement(container, e.clientX);
+          if (afterElement == null) {
+            container.appendChild(draggedItem);
+          } else {
+            container.insertBefore(draggedItem, afterElement);
+          }
+        });
+      
+        function getDragAfterElement(container, x) {
+          const draggableElements = [...container.querySelectorAll(".draggable-photo:not(.dragging)")];
+      
+          return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = x - box.left - box.width / 2;
+            if (offset < 0 && offset > closest.offset) {
+              return { offset: offset, element: child };
+            } else {
+              return closest;
+            }
+          }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+      
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+        <script>
+  let touchStartX = 0;
+  let selectedImage = null;
+
+  const container = document.getElementById('photoContainer');
+  const images = container.querySelectorAll('.draggable-photo');
+
+  images.forEach(img => {
+    img.addEventListener('touchstart', function (e) {
+      touchStartX = e.touches[0].clientX;
+      selectedImage = img;
+    });
+
+    img.addEventListener('touchmove', function (e) {
+      e.preventDefault();
+    });
+
+    img.addEventListener('touchend', function (e) {
+      let touchEndX = e.changedTouches[0].clientX;
+      let direction = touchEndX - touchStartX;
+
+      const nextSibling = selectedImage.nextElementSibling;
+      const prevSibling = selectedImage.previousElementSibling;
+
+      if (direction > 50 && prevSibling) {
+        container.insertBefore(selectedImage, prevSibling);
+      } else if (direction < -50 && nextSibling) {
+        container.insertBefore(nextSibling, selectedImage);
+      }
+
+      selectedImage = null;
+    });
+  });
+</script>
+
+
+<script>
+  const container = document.getElementById("photoContainer");
+  let draggedItem = null;
+
+  container.addEventListener("dragstart", function (e) {
+    if (e.target.classList.contains("draggable-photo")) {
+      draggedItem = e.target;
+      setTimeout(() => {
+        e.target.classList.add("dragging");
+      }, 0);
+    }
+  });
+
+  container.addEventListener("dragend", function (e) {
+    if (e.target.classList.contains("draggable-photo")) {
+      e.target.classList.remove("dragging");
+    }
+  });
+
+  container.addEventListener("dragover", function (e) {
+    e.preventDefault();
+    const afterElement = getDragAfterElement(container, e.clientX);
+    if (afterElement == null) {
+      container.appendChild(draggedItem);
+    } else {
+      container.insertBefore(draggedItem, afterElement);
+    }
+  });
+
+  function getDragAfterElement(container, x) {
+    const draggableElements = [...container.querySelectorAll(".draggable-photo:not(.dragging)")];
+
+    return draggableElements.reduce((closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = x - box.left - box.width / 2;
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+  }
+
+  function checkOrder() {
+    const photos = container.querySelectorAll(".draggable-photo");
+    let correct = true;
+    photos.forEach((photo, index) => {
+      const correctOrder = photo.getAttribute("data-order");
+      if (parseInt(correctOrder) !== index + 1) {
+        correct = false;
+      }
+    });
+
+    const result = document.getElementById("photoResult");
+    if (correct) {
+      result.textContent = "Awwww! You got it right baby 💖 You really remember everything 🥹✨";
+      confetti({
+        particleCount: 200,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+    } else {
+      result.textContent = "Hmm, not quite 😢 Try again na babu. I know you can do it! 💗";
+    }
+  }
+</script>
+      </script>
+    
+    <p>I love you more than I’ve ever found a way to say to you. Please don’t ever think that you’re a burden or that I’m unhappy. I just want us, always. ❤️</p>
+    <div class="quote">You are my today and all of my tomorrows.</div>
+
+    <div class="game-container">
+        <div class="game-question">Which moment reminds you of us the most?</div>
+        <div class="game-options">
+          <button onclick="showResult('Aww! Every moment is special, but that wasn’t it.')">Our first kiss</button>
+          <button onclick="showResult('Correct 💖 You know us so well!')">Our first hug (bed wala specially)</button>
+          <button onclick="showResult('Close! But I’ll always remember our first hug.')">Vo jo mene babu bola tha</button>
+        </div>
+
+        <!-- 'Correct 💖 You know us so well!'
+        'Aww! Every moment is special, but that wasn’t it.'
+        Close! But I’ll always remember our first hug.' -->
+
+
+        <div id="gameResult" class="game-result"></div>
+      </div>
+
+      <div class="footer">Forever yours,<br>Your Love 💖</div>
+      <audio id="bg-music" loop>
+        <source src="your-music.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+      </audio>
+    </div>
+  
+
+    <script>
+        function showResult(message) {
+          document.getElementById('gameResult').textContent = message;
+        }
+    
+        function showResult2(message) {
+          document.getElementById('quizResult2').textContent = message;
+        }
+    
+        window.addEventListener('DOMContentLoaded', function () {
+          const audio = document.getElementById('bg-music');
+          function startAudio() {
+            audio.play().catch(e => console.log("Autoplay blocked:", e));
+            document.removeEventListener('click', startAudio);
+            document.removeEventListener('touchstart', startAudio);
+          }
+          document.addEventListener('click', startAudio);
+          document.addEventListener('touchstart', startAudio);
+        });
+      </script>
+    </body>
+    </html>
+    
+
